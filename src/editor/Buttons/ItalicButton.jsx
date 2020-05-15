@@ -20,7 +20,12 @@ export default class ItalicButton extends Button {
     }
 
     action (editor) {
+        let selection = editor.getSelections()
         editor.getDoc().replaceSelection('*' + editor.getDoc().getSelection() + '*')
         editor.focus()
+        if (selection[0] === "") {
+            let cursor = editor.getCursor()
+            editor.setCursor({line: cursor.line, ch: 1})
+        }
     }
 }
